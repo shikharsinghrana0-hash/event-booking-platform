@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EventPulse - Modern Event Discovery & Ticket Booking Platform. Explore concerts, AI summits, gastronomy galas, and book digital passes instantly.">
+  <meta name="theme-color" content="#0a0d14">
+  <title>EventPulse | Modern Event Discovery & Ticket Booking Platform</title>
+
+  <!-- Google Fonts & Style -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/></svg>">
+</head>
+<body>
+  <!-- Ambient Atmospheric Glow Accents -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-bottom-right"></div>
+
+  <!-- SITE NAVIGATION HEADER -->
+  <header class="site-header">
+    <div class="container navbar">
+      <!-- Brand Logo -->
+      <a href="#" class="nav-brand">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </div>
+        <span>Event<span class="gradient-text">Pulse</span></span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item active"><a href="#heroSection">Home</a></li>
+          <li class="nav-item"><a href="#categoriesSection">Categories</a></li>
+          <li class="nav-item"><a href="#eventsSection">Explore Events</a></li>
+          <li class="nav-item"><a href="#featuresSection">How It Works</a></li>
+          <li class="nav-item"><a href="#admin" onclick="openAdminModal(); return false;" style="color: var(--primary); font-weight: 600;">Admin Panel</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Search, Wishlist, Theme Toggle, Auth, Organizer Portal) -->
+      <div class="nav-actions">
+        <!-- Quick Search Keyboard Trigger -->
+        <button class="search-trigger-btn" onclick="document.getElementById('filterSearchInput').focus(); scrollToSection('eventsSection');" title="Quick Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Search</span>
+          <span class="kbd">/</span>
+        </button>
+
+        <!-- Wishlist Button -->
+        <button class="btn-icon wishlist-btn-nav" onclick="openWishlistModal()" title="View Saved Events">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge-count" id="navWishlistCount">0</span>
+        </button>
+
+        <!-- My Tickets Button -->
+        <button class="btn btn-secondary btn-sm" onclick="openMyTicketsModal()" title="My Booked Passes">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>
+          <span>My Tickets</span>
+          <span class="badge badge-primary" id="navTicketsCount" style="padding: 0.15rem 0.5rem; font-size: 0.7rem;">0</span>
+        </button>
+
+        <!-- Admin & Organizer Portal Switch -->
+        <button class="btn btn-secondary btn-sm" onclick="openAdminModal()" title="Admin & Organizer Studio" style="border: 1px solid var(--primary); font-weight: 700; color: var(--primary);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Admin Panel</span>
+        </button>
+
+        <!-- Currency Selector (INR ₹ & USD $) -->
+        <div class="currency-segmented-pill" title="Toggle Currency (Rupees ₹ / Dollars $)">
+          <button type="button" class="curr-pill-btn active" id="currBtnINR" onclick="setCurrency('INR')">₹ INR</button>
+          <button type="button" class="curr-pill-btn" id="currBtnUSD" onclick="setCurrency('USD')">$ USD</button>
+        </div>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button class="btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- User Sign In / Profile Box -->
+        <div id="navUserActionBox">
+          <button class="btn btn-primary btn-sm" onclick="openAuthModal('signin')">
+            Sign In
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="btn-icon mobile-toggle" id="mobileNavToggle" title="Open Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <a href="#heroSection" onclick="document.getElementById('mobileNavDrawer').classList.remove('open')">Home</a>
+      <a href="#categoriesSection" onclick="document.getElementById('mobileNavDrawer').classList.remove('open')">Categories</a>
+      <a href="#eventsSection" onclick="document.getElementById('mobileNavDrawer').classList.remove('open')">Explore Events</a>
+      <a href="#featuresSection" onclick="document.getElementById('mobileNavDrawer').classList.remove('open')">How It Works</a>
+      <a href="#admin" onclick="document.getElementById('mobileNavDrawer').classList.remove('open'); openAdminModal();">⚡ Admin Panel</a>
+      <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+        <button class="btn btn-secondary btn-sm" onclick="openMyTicketsModal()">My Tickets</button>
+        <button class="btn btn-outline btn-sm" onclick="openAdminModal()">Admin Studio</button>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-subtle);">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Currency</span>
+        <div class="currency-segmented-pill">
+          <button type="button" class="curr-pill-btn" id="currBtnINRMobile" onclick="setCurrency('INR')">₹ INR</button>
+          <button type="button" class="curr-pill-btn" id="currBtnUSDMobile" onclick="setCurrency('USD')">$ USD</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTENT -->
+  <main>
+    <!-- HERO SECTION: Bento Grid Masterpiece (Trending Pinterest Design) -->
+    <section class="hero-section" id="heroSection">
+      <div class="container">
+        <div class="hero-bento-grid">
+          <!-- Spotlight Featured Card (Span 8) -->
+          <div class="bento-card-main" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80');">
+            <div class="bento-card-main-content">
+              <!-- Live Countdown Ribbon -->
+              <div class="hero-countdown-box">
+                <span class="badge badge-hot">FEATURED SPOTLIGHT</span>
+                <div id="heroCountdown">
+                  <!-- Injected via JavaScript countdown engine -->
+                </div>
+              </div>
+
+              <h1 class="hero-title">Neon Horizon Electronic Music Festival 2026</h1>
+
+              <div class="hero-meta-bar">
+                <div class="hero-meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <span>Dec 18, 2026 • 18:00 - 02:00</span>
+                </div>
+                <div class="hero-meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>Solaria Arena, San Francisco, CA</span>
+                </div>
+                <div class="hero-meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>4.9 / 5 Rating</span>
+                </div>
+              </div>
+
+              <div class="hero-actions-group">
+                <button class="btn btn-primary btn-lg" onclick="openBookingModal('evt-001')">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span id="heroBookingBtnText">Book Tickets</span>
+                </button>
+                <button class="btn btn-secondary btn-lg" onclick="openEventDetails('evt-001')">
+                  <span>Explore Schedule</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instant Discovery Widget (Span 4) -->
+          <div class="bento-card-search">
+            <div>
+              <span class="badge badge-cyan" style="margin-bottom: 0.75rem;">QUICK DISCOVERY</span>
+              <h3>Find Next Experience</h3>
+              <p>Discover hand-picked concerts, tech summits, food festivals & sports.</p>
+
+              <form class="search-form-compact" onsubmit="return false;">
+                <div class="form-field-group">
+                  <label for="heroSearchInput">Search by Keyword</label>
+                  <div class="input-with-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="heroSearchInput" placeholder="e.g. AI, Cyber, Wine, Symphony...">
+                  </div>
+                </div>
+
+                <div class="form-field-group">
+                  <label for="heroCategorySelect">Category</label>
+                  <div class="input-with-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <select id="heroCategorySelect">
+                      <option value="all">All Event Categories</option>
+                      <option value="music">Concerts & Music</option>
+                      <option value="tech">Tech & AI Summits</option>
+                      <option value="food">Food & Wine Galas</option>
+                      <option value="arts">Arts & Theatre</option>
+                      <option value="sports">Sports & Gaming</option>
+                      <option value="business">Business & Networking</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-field-group">
+                  <label for="heroLocationSelect">Location / Mode</label>
+                  <div class="input-with-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <select id="heroLocationSelect">
+                      <option value="all">Any Location</option>
+                      <option value="in-person">In-Person Only</option>
+                      <option value="hybrid">Hybrid & Virtual Stream</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button class="btn btn-primary" id="heroSearchSubmit" style="margin-top: 0.5rem; width: 100%;">
+                  <span>Explore Matching Events</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Secondary Bento Stats (Span 4) -->
+          <div class="bento-card-stats">
+            <div class="stat-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-number">120K+</div>
+              <div class="stat-label">Happy Attendees This Season</div>
+            </div>
+          </div>
+
+          <!-- Secondary Bento Banner (Span 8) -->
+          <div class="bento-card-banner">
+            <div class="banner-text">
+              <h4>Instant Digital Passes with QR Entry</h4>
+              <p>Book securely, receive an Apple Wallet-style pass, barcode, and calendar sync.</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="scrollToSection('eventsSection')">
+              Browse All
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EVENT CATEGORIES BENTO GRID -->
+    <section class="section" id="categoriesSection">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-content">
+            <h2>Explore by <span class="gradient-text">Category</span></h2>
+            <p>From underground electronic sets to cutting-edge AI summits and gourmet galas.</p>
+          </div>
+        </div>
+
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- Injected via JavaScript renderCategoriesGrid() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: EVENT EXPLORER & LISTING -->
+    <section class="section" id="eventsSection">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-content">
+            <h2>Upcoming <span class="gradient-text">Experiences</span></h2>
+            <p>Hand-picked, high-production events happening this week and beyond.</p>
+          </div>
+          <span class="badge badge-primary" id="eventsResultCount">Loading Events...</span>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="filter-toolbar">
+          <div class="filter-top-row">
+            <!-- Search Input -->
+            <div class="filter-search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="filterSearchInput" placeholder="Search event by name, venue, city, or performer...">
+            </div>
+
+            <!-- Filter Dropdowns -->
+            <div class="filter-dropdowns">
+              <!-- Date Filter -->
+              <select class="filter-select" id="filterDateSelect">
+                <option value="all">📅 Any Date</option>
+                <option value="today">Today</option>
+                <option value="weekend">This Weekend</option>
+                <option value="month">This Month</option>
+              </select>
+
+              <!-- Price Filter -->
+              <select class="filter-select" id="filterPriceSelect">
+                <option value="all">🏷️ Any Price</option>
+                <option value="free">Free Events</option>
+                <option value="under50">Under ₹4,000</option>
+                <option value="50-150">₹4,000 - ₹12,000</option>
+                <option value="over150">₹12,000+</option>
+              </select>
+
+              <!-- Sort Filter -->
+              <select class="filter-select" id="filterSortSelect">
+                <option value="upcoming">⚡ Sort: Upcoming First</option>
+                <option value="price-low">💵 Price: Low to High</option>
+                <option value="price-high">💎 Price: High to Low</option>
+                <option value="popularity">🔥 Most Popular</option>
+              </select>
+
+              <!-- Grid vs List View Switcher -->
+              <div class="view-toggle-group">
+                <button class="view-toggle-btn active" id="viewGridBtn" onclick="setViewMode('grid')" title="Grid View">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+                <button class="view-toggle-btn" id="viewListBtn" onclick="setViewMode('list')" title="List View">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Category Pills Row -->
+          <div class="category-pills" id="categoryPillsContainer">
+            <!-- Injected via JavaScript -->
+          </div>
+        </div>
+
+        <!-- Dynamic Events Grid -->
+        <div class="events-grid" id="eventsGrid">
+          <!-- Injected via JavaScript renderEvents() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: HOW IT WORKS / PLATFORM FEATURES -->
+    <section class="section" id="featuresSection">
+      <div class="container">
+        <div class="section-header" style="text-align: center; justify-content: center; flex-direction: column;">
+          <h2>How EventPulse <span class="gradient-text">Works</span></h2>
+          <p>Effortless booking, instant digital pass delivery, and zero hidden fees.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-step-card">
+            <div class="step-num-badge">01</div>
+            <h3>Discover & Select</h3>
+            <p>Browse through hundreds of curated local and global events. Filter by genre, date, venue, or budget with live availability.</p>
+          </div>
+
+          <div class="feature-step-card">
+            <div class="step-num-badge">02</div>
+            <h3>Seamless Checkout</h3>
+            <p>Pick your tier (General, VIP, Backstage), apply student or early-bird promo codes, and pay with instant card preview or 1-touch pay.</p>
+          </div>
+
+          <div class="feature-step-card">
+            <div class="step-num-badge">03</div>
+            <h3>Digital Pass & Access</h3>
+            <p>Receive your scannable digital boarding pass with unique QR and barcode. Download for offline use, add to Apple Wallet, or print directly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: NEWSLETTER & VIP PROMO CALL TO ACTION -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner">
+          <div class="cta-banner-content">
+            <span class="badge badge-primary" style="margin-bottom: 0.75rem;">EXCLUSIVE ACCESS</span>
+            <h2>Unlock 20% Off Your First Booking</h2>
+            <p>Join 45,000+ event lovers. Get secret presale access, artist drop alerts, and instant 20% discount code.</p>
+          </div>
+
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Enter your email address..." required>
+            <button type="submit" class="btn btn-primary">
+              <span>Claim Code</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand Col -->
+        <div class="footer-brand-col">
+          <a href="#" class="nav-brand">
+            <div class="brand-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            </div>
+            <span>Event<span class="gradient-text">Pulse</span></span>
+          </a>
+          <p>The modern platform connecting curious minds with electrifying live performances, groundbreaking technology summits, and culture festivals.</p>
+          <div class="footer-social-links">
+            <a href="#" class="btn-icon" title="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" class="btn-icon" title="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" class="btn-icon" title="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Links Col 1 -->
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#eventsSection" onclick="setCategoryFilter('music')">Concerts & Music</a></li>
+            <li><a href="#eventsSection" onclick="setCategoryFilter('tech')">Tech & AI Summits</a></li>
+            <li><a href="#eventsSection" onclick="setCategoryFilter('food')">Food & Culinary Galas</a></li>
+            <li><a href="#eventsSection" onclick="setCategoryFilter('sports')">Sports & Gaming Tournaments</a></li>
+            <li><a href="#eventsSection" onclick="setCategoryFilter('arts')">Arts & Theatre Shows</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Col 2 -->
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="openMyTicketsModal()">My Booked Tickets</a></li>
+            <li><a href="#" onclick="openWishlistModal()">Saved Wishlist</a></li>
+            <li><a href="#admin" onclick="openAdminModal(); return false;">⚡ Admin & Organizer Panel</a></li>
+            <li><a href="#" onclick="openCreateEventModal()">Host an Event</a></li>
+            <li><a href="#featuresSection">Booking Guarantee</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Col 3 -->
+        <div class="footer-col">
+          <h4>Help & Policies</h4>
+          <ul class="footer-links">
+            <li><a href="#">Refund Policy (100% Guarantee)</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy & Cookie Policy</a></li>
+            <li><a href="#">Accessibility Guide</a></li>
+            <li><a href="#">Contact Support 24/7</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 EventPulse Platform Inc. All rights reserved. Crafted for modern web excellence.</div>
+        <div style="display:flex; gap:1.5rem;">
+          <span>Security: 256-Bit SSL Encrypted</span>
+          <span>Status: All Systems Operational</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALS & DIALOGS
+       ========================================================================== -->
+
+  <!-- 1. EVENT DETAILS MODAL -->
+  <div class="modal-overlay" id="eventDetailsModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="document.getElementById('eventDetailsModal').classList.remove('open')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="eventDetailsModalContent">
+        <!-- Injected via JavaScript openEventDetails() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MULTI-STEP TICKET BOOKING & CHECKOUT MODAL -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-dialog" style="max-width: 680px;">
+      <button class="modal-close-btn" onclick="closeBookingModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="booking-wizard-container">
+        <!-- Wizard Step Nodes Indicator -->
+        <div class="wizard-steps-indicator">
+          <div class="wizard-step-node active" data-step="1">
+            <div class="step-circle">1</div>
+            <span class="step-title">Tickets</span>
+          </div>
+          <div class="wizard-step-node" data-step="2">
+            <div class="step-circle">2</div>
+            <span class="step-title">Attendee</span>
+          </div>
+          <div class="wizard-step-node" data-step="3">
+            <div class="step-circle">3</div>
+            <span class="step-title">Payment</span>
+          </div>
+          <div class="wizard-step-node" data-step="4">
+            <div class="step-circle">4</div>
+            <span class="step-title">Pass</span>
+          </div>
+        </div>
+
+        <!-- STEP 1 PANE: Ticket Selection & Pricing -->
+        <div class="wizard-pane" id="wizardStep1">
+          <h3 style="font-size: 1.45rem; margin-bottom: 0.5rem;">Select Your Ticket Tier</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Choose the experience tier that best fits your preference.</p>
+
+          <div class="tiers-selector-list" id="tierSelectionContainer">
+            <!-- Dynamic tiers injected via JavaScript -->
+          </div>
+
+          <!-- Quantity Stepper -->
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 1.25rem; background:var(--bg-glass-input); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+            <div>
+              <div style="font-weight: 600;">Number of Tickets</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Maximum 10 tickets per transaction</div>
+            </div>
+            <div class="stepper-control">
+              <button class="stepper-btn" onclick="changeQuantity(-1)">−</button>
+              <div class="stepper-value" id="ticketQtyDisplay">1</div>
+              <button class="stepper-btn" onclick="changeQuantity(1)">+</button>
+            </div>
+          </div>
+
+          <!-- Promo Code Box -->
+          <div class="coupon-input-box">
+            <input type="text" id="couponInput" placeholder="Promo code (Try 'EARLY20' or 'STUDENT50')">
+            <button class="btn btn-secondary btn-sm" onclick="applyCouponCode()">Apply</button>
+          </div>
+
+          <!-- Live Price Summary Breakdown -->
+          <div class="order-summary-box">
+            <div class="summary-row">
+              <span id="summaryTicketName">Tier × 1</span>
+              <span id="summarySubtotal">$0.00</span>
+            </div>
+            <div class="summary-row" id="summaryDiscountRow" style="display: none; color: #10b981;">
+              <span>Promo Discount Applied</span>
+              <span id="summaryDiscount">-$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Service Fee & Tax (8%)</span>
+              <span id="summaryFee">$0.00</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total Amount</span>
+              <span id="summaryTotal">$0.00</span>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 1.75rem;">
+            <button class="btn btn-primary" onclick="renderWizardStep(2)">
+              <span>Continue to Attendee Info</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2 PANE: Attendee Registration Form & Validation -->
+        <div class="wizard-pane" id="wizardStep2" style="display: none;">
+          <h3 style="font-size: 1.45rem; margin-bottom: 0.5rem;">Attendee Information</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Tickets and QR codes will be issued to this name and email address.</p>
+
+          <form id="attendeeForm" onsubmit="return false;" class="booking-form-grid">
+            <div class="form-full-width">
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Full Name *
+              </label>
+              <input type="text" id="attendeeName" class="form-input" placeholder="e.g. Jordan Sterling" required>
+              <span class="input-error-text">Please enter a valid full name (minimum 3 characters).</span>
+            </div>
+
+            <div>
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Email Address *
+              </label>
+              <input type="email" id="attendeeEmail" class="form-input" placeholder="jordan@example.com" required>
+              <span class="input-error-text">Please provide a valid email for ticket delivery.</span>
+            </div>
+
+            <div>
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Phone Number *
+              </label>
+              <input type="tel" id="attendeePhone" class="form-input" placeholder="+1 (555) 000-0000" required>
+              <span class="input-error-text">Please enter a valid phone number.</span>
+            </div>
+
+            <div class="form-full-width">
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Special Requests or Dietary Notes (Optional)
+              </label>
+              <input type="text" id="attendeeNotes" class="form-input" placeholder="Allergies, wheelchair access, seating requests...">
+            </div>
+
+            <div class="form-full-width" style="display:flex; align-items:flex-start; gap:0.6rem; margin-top:0.5rem;">
+              <input type="checkbox" id="termsCheckbox" checked style="margin-top:0.3rem; accent-color:var(--primary);">
+              <label for="termsCheckbox" style="font-size:0.82rem; color:var(--text-muted);">
+                I agree to the <a href="#" style="color:var(--primary); text-decoration:underline;">EventPulse Terms of Service</a> and confirm all attendee information is accurate for gate verification.
+              </label>
+            </div>
+          </form>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button class="btn btn-secondary" onclick="renderWizardStep(1)">
+              Back
+            </button>
+            <button class="btn btn-primary" onclick="validateAndProceedStep2()">
+              <span>Proceed to Payment</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3 PANE: Interactive Payment UI & 3D Virtual Card -->
+        <div class="wizard-pane" id="wizardStep3" style="display: none;">
+          <h3 style="font-size: 1.45rem; margin-bottom: 0.5rem;">Secure Payment</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">256-bit encrypted checkout. No real cards will be charged.</p>
+
+          <!-- Payment Methods Tabs -->
+          <div class="payment-methods-tabs">
+            <button class="pay-tab-btn active" data-method="card" onclick="setPaymentMethod('card')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+              <span>Credit Card</span>
+            </button>
+            <button class="pay-tab-btn" data-method="apple" onclick="setPaymentMethod('apple')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.72-.93 2.74 1.01.08 2.01-.49 2.63-1.24z"/></svg>
+              <span>Apple Pay</span>
+            </button>
+            <button class="pay-tab-btn" data-method="paypal" onclick="setPaymentMethod('paypal')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.82 0.957 4.96-.54 3.328-2.607 5.15-6.143 5.415-.417.03-.787.29-.933.682l-1.63 4.316a.641.641 0 0 1-.602.414H7.076z"/></svg>
+              <span>PayPal</span>
+            </button>
+          </div>
+
+          <!-- 3D Virtual Credit Card Preview -->
+          <div class="virtual-card-wrapper">
+            <div class="virtual-card">
+              <div class="card-top-row">
+                <div class="card-chip"></div>
+                <div style="font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.1em;">EVENT PASS</div>
+              </div>
+              <div class="card-number-display" id="previewCardNumber">
+                •••• •••• •••• ••••
+              </div>
+              <div class="card-bottom-row">
+                <div>
+                  <span style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;">Card Holder</span>
+                  <div class="card-holder-name" id="previewCardHolder">CARDHOLDER NAME</div>
+                </div>
+                <div>
+                  <span style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase;">Expires</span>
+                  <div class="card-expiry-display" id="previewCardExpiry">MM/YY</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credit Card Input Fields -->
+          <div id="cardPaymentForm" class="booking-form-grid">
+            <div class="form-full-width">
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Name on Card
+              </label>
+              <input type="text" id="cardNameInput" class="form-input" placeholder="JOHN DOE" value="JORDAN STERLING">
+            </div>
+
+            <div class="form-full-width">
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Card Number
+              </label>
+              <input type="text" id="cardNumberInput" class="form-input" placeholder="4532 8920 1204 9812" maxlength="19">
+            </div>
+
+            <div>
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Expiration Date
+              </label>
+              <input type="text" id="cardExpiryInput" class="form-input" placeholder="MM/YY" maxlength="5">
+            </div>
+
+            <div>
+              <label style="display:block; font-size:0.8rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">
+                Security CVV
+              </label>
+              <input type="password" id="cardCvvInput" class="form-input" placeholder="•••" maxlength="4">
+            </div>
+          </div>
+
+          <!-- Alternative Payment (Apple Pay / PayPal Mock) -->
+          <div id="alternativePaymentForm" style="display:none; text-align:center; padding:2rem; background:var(--bg-glass-input); border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+            <h4 id="altPaymentMethodName">Apple Pay</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Authenticate with Biometrics (TouchID / FaceID) or one-touch authorization.</p>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <button class="btn btn-secondary" onclick="renderWizardStep(2)">
+              Back
+            </button>
+            <button class="btn btn-primary" id="paySubmitBtn" onclick="processPaymentAndBook()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Authorize & Book Tickets</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4 PANE: Booking Confirmation & Digital Ticket Pass -->
+        <div class="wizard-pane" id="wizardStep4" style="display: none;">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div style="display: inline-flex; width: 56px; height: 56px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); color: #10b981; align-items: center; justify-content: center; margin-bottom: 0.75rem;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h3 style="font-size: 1.75rem; font-weight: 800;">Registration Confirmed!</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Your official boarding pass and QR code have been issued below.</p>
+          </div>
+
+          <!-- Digital Boarding Pass Container -->
+          <div class="digital-ticket-container" id="digitalTicketRenderBox">
+            <!-- Digital Ticket Pass injected via JavaScript renderStep4() -->
+          </div>
+
+          <!-- Action Buttons for the Ticket -->
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+            <button class="btn btn-primary" onclick="printDigitalTicket()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>Print / Save Ticket</span>
+            </button>
+            <button class="btn btn-secondary" onclick="downloadCalendarInvite()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span>Add to Calendar (.ics)</span>
+            </button>
+            <button class="btn btn-outline" onclick="closeBookingModal(); openMyTicketsModal();">
+              <span>View in My Tickets</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MY TICKETS DRAWER / MODAL -->
+  <div class="modal-overlay" id="myTicketsModal">
+    <div class="modal-dialog" style="max-width: 640px;">
+      <button class="modal-close-btn" onclick="document.getElementById('myTicketsModal').classList.remove('open')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div style="padding: 2.25rem;">
+        <h3 style="font-size: 1.45rem; margin-bottom: 0.35rem;">My Booked Passes</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Access your confirmed passes, QR codes, and entry details anytime.</p>
+        <div id="myTicketsListContainer">
+          <!-- Injected via JavaScript openMyTicketsModal() -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SAVED / WISHLIST MODAL -->
+  <div class="modal-overlay" id="wishlistModal">
+    <div class="modal-dialog" style="max-width: 600px;">
+      <button class="modal-close-btn" onclick="document.getElementById('wishlistModal').classList.remove('open')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div style="padding: 2.25rem;">
+        <h3 style="font-size: 1.45rem; margin-bottom: 0.35rem;">Saved Events Wishlist</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Your shortlisted experiences saved for quick booking.</p>
+        <div id="wishlistEventsContainer">
+          <!-- Injected via JavaScript openWishlistModal() -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. USER AUTH (LOGIN / SIGNUP) MODAL -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-dialog" style="max-width: 440px;">
+      <button class="modal-close-btn" onclick="document.getElementById('authModal').classList.remove('open')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div style="padding: 2.25rem;">
+        <!-- Auth Tabs -->
+        <div style="display:flex; background:var(--bg-glass-input); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:3px; margin-bottom:1.5rem;">
+          <button id="authTabSignin" class="btn btn-sm active" style="flex:1;" onclick="switchAuthTab('signin')">Sign In</button>
+          <button id="authTabSignup" class="btn btn-sm" style="flex:1;" onclick="switchAuthTab('signup')">Create Account</button>
+        </div>
+
+        <!-- Social Logins -->
+        <div style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.5rem;">
+          <button class="btn btn-secondary" onclick="handleSocialLogin('Google')" style="width:100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.4l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.7c-.2-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3L1.9 7.2C.7 9.6 0 12.3 0 15.1c0 2.8.7 5.5 1.9 7.9l3.7-2.9z"/><path fill="#34A853" d="M12 23.5c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.3L1.9 16.4C3.7 20.2 7.5 23.5 12 23.5z"/></svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="btn btn-secondary" onclick="handleSocialLogin('Apple')" style="width:100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.63 1.35-.57.65-1.06 1.72-.93 2.74 1.01.08 2.01-.49 2.63-1.24z"/></svg>
+            <span>Continue with Apple</span>
+          </button>
+        </div>
+
+        <div style="text-align:center; position:relative; margin:1.25rem 0;">
+          <hr style="border:none; border-top:1px solid var(--border-subtle);">
+          <span style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:var(--bg-card-solid); padding:0 0.75rem; font-size:0.75rem; color:var(--text-muted);">OR WITH EMAIL</span>
+        </div>
+
+        <!-- Sign In Form -->
+        <form id="authSigninForm" onsubmit="handleAuthSubmit('signin', event)">
+          <div style="margin-bottom:1rem;">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Email Address</label>
+            <input type="email" id="signinEmail" class="form-input" placeholder="alex@example.com" required value="alex.mercer@gmail.com">
+          </div>
+          <div style="margin-bottom:1.25rem;">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Password</label>
+            <input type="password" id="signinPassword" class="form-input" placeholder="••••••••" required value="password123">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form id="authSignupForm" style="display:none;" onsubmit="handleAuthSubmit('signup', event)">
+          <div style="margin-bottom:1rem;">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Full Name</label>
+            <input type="text" id="signupName" class="form-input" placeholder="Jordan Sterling" required>
+          </div>
+          <div style="margin-bottom:1rem;">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Email Address</label>
+            <input type="email" id="signupEmail" class="form-input" placeholder="jordan@example.com" required>
+          </div>
+          <div style="margin-bottom:1.25rem;">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Password</label>
+            <input type="password" id="signupPassword" class="form-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Create Free Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. ORGANIZER / ADMIN DASHBOARD MODAL -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-dialog" style="max-width: 1040px;">
+      <button class="modal-close-btn" onclick="closeAdminModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div style="padding: 2.25rem;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="badge badge-primary">⚡ EXECUTIVE STUDIO</span>
+              <span class="badge badge-emerald">SYSTEM ACTIVE</span>
+            </div>
+            <h2 style="font-size: 1.85rem; margin-top:0.35rem;">Admin & Organizer Portal</h2>
+          </div>
+          <div style="display:flex; gap:0.75rem;">
+            <button class="btn btn-primary" onclick="openCreateEventModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Publish New Event</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Tab Navigation -->
+        <div class="admin-tab-nav">
+          <button class="admin-tab-btn active" id="adminTabOverviewBtn" onclick="switchAdminTab('overview')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Overview & Analytics</span>
+          </button>
+          <button class="admin-tab-btn" id="adminTabEventsBtn" onclick="switchAdminTab('events')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            <span>Manage Events (<span id="adminEventsCountBadge">0</span>)</span>
+          </button>
+          <button class="admin-tab-btn" id="adminTabAttendeesBtn" onclick="switchAdminTab('attendees')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Attendees & Verification (<span id="adminAttendeesCountBadge">0</span>)</span>
+          </button>
+          <button class="admin-tab-btn" id="adminTabFinancialsBtn" onclick="switchAdminTab('financials')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="6" x2="12" y2="18"></line></svg>
+            <span>Financials & Payouts</span>
+          </button>
+        </div>
+
+        <!-- PANE 1: Overview & Analytics -->
+        <div class="admin-tab-pane active" id="adminPaneOverview">
+          <div class="admin-metrics-grid">
+            <div class="admin-metric-card">
+              <span class="metric-title">Gross Revenue</span>
+              <div class="metric-val" id="adminMetricRevenue">$64,280</div>
+              <span class="metric-trend">↑ +14.2% velocity</span>
+            </div>
+            <div class="admin-metric-card">
+              <span class="metric-title">Tickets Sold</span>
+              <div class="metric-val" id="adminMetricAttendees">1,480</div>
+              <span class="metric-trend">↑ 88% capacity rate</span>
+            </div>
+            <div class="admin-metric-card">
+              <span class="metric-title">Live Events</span>
+              <div class="metric-val" id="adminMetricEvents">8</div>
+              <span class="metric-trend">● All systems healthy</span>
+            </div>
+            <div class="admin-metric-card">
+              <span class="metric-title">Conversion Rate</span>
+              <div class="metric-val" id="adminMetricConversion">8.4%</div>
+              <span class="metric-trend">↑ +1.1% vs industry avg</span>
+            </div>
+          </div>
+
+          <div class="chart-container-card">
+            <div class="chart-header">
+              <div>
+                <h4>7-Day Ticket Sales & Revenue Velocity</h4>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">Live hourly admissions and check-out telemetry</p>
+              </div>
+              <span class="badge badge-cyan">REALTIME DATA</span>
+            </div>
+            <div id="adminChartSvgContainer"></div>
+          </div>
+        </div>
+
+        <!-- PANE 2: Manage Events Table -->
+        <div class="admin-tab-pane" id="adminPaneEvents">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+            <h4>All Listed Events on Platform</h4>
+            <button class="btn btn-primary btn-sm" onclick="openCreateEventModal()">+ Add New Event</button>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Event Cover & Title</th>
+                  <th>Category</th>
+                  <th>Date & Venue</th>
+                  <th>Price</th>
+                  <th>Seats Booked</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminEventsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PANE 3: Attendees & Check-Ins Table -->
+        <div class="admin-tab-pane" id="adminPaneAttendees">
+          <div class="admin-search-bar">
+            <input type="text" id="adminAttendeeSearchInput" class="admin-search-input" placeholder="🔍 Search attendee by name, email, or Order Ref #..." oninput="filterAdminAttendees()">
+            <select id="adminAttendeeStatusFilter" class="filter-select" onchange="filterAdminAttendees()">
+              <option value="all">All Statuses</option>
+              <option value="checked">Checked-In Only</option>
+              <option value="pending">Pending Only</option>
+            </select>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order Ref</th>
+                  <th>Attendee Info</th>
+                  <th>Event Title</th>
+                  <th>Tier & Qty</th>
+                  <th>Amount Paid</th>
+                  <th>Gate Verification</th>
+                </tr>
+              </thead>
+              <tbody id="adminBookingsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PANE 4: Financials & Payouts -->
+        <div class="admin-tab-pane" id="adminPaneFinancials">
+          <div class="admin-metrics-grid">
+            <div class="admin-metric-card">
+              <span class="metric-title">Gross Volume</span>
+              <div class="metric-val" id="adminFinGross">$64,280</div>
+              <span style="font-size:0.75rem; color:var(--text-muted);">100% total collected</span>
+            </div>
+            <div class="admin-metric-card">
+              <span class="metric-title">Platform Processing (8%)</span>
+              <div class="metric-val" id="adminFinFees" style="color:#ef4444;">$5,142</div>
+              <span style="font-size:0.75rem; color:var(--text-muted);">Gateway & infrastructure</span>
+            </div>
+            <div class="admin-metric-card">
+              <span class="metric-title">Net Organizer Payout</span>
+              <div class="metric-val" id="adminFinNet" style="color:#10b981;">$59,138</div>
+              <span style="font-size:0.75rem; color:#10b981;">Ready for wire transfer</span>
+            </div>
+            <div class="admin-metric-card">
+              <span class="metric-title">Payout Status</span>
+              <div class="metric-val" style="font-size:1.1rem; color:#10b981; margin-top:0.4rem;">CONNECTED ✓</div>
+              <span style="font-size:0.75rem; color:var(--text-muted);">Stripe & Razorpay Ready</span>
+            </div>
+          </div>
+
+          <div style="background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:1.5rem; margin-top:1.5rem;">
+            <h4 style="margin-bottom:0.5rem;">Direct Bank Payout Account</h4>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">Withdrawals are deposited daily into your verified merchant account.</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-glass-input); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle); flex-wrap:wrap; gap:0.5rem;">
+              <div>
+                <strong>HDFC / Chase Commercial Checking •••• 9842</strong>
+                <div style="font-size:0.78rem; color:var(--text-muted); margin-top:0.2rem;">Beneficiary: EventPulse Productions LLC • Routing # 021000021</div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="showToast('Initiating instant transfer to verified bank account...', 'success')">Request Instant Payout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. CREATE NEW EVENT MODAL -->
+  <div class="modal-overlay" id="createEventModal">
+    <div class="modal-dialog" style="max-width: 640px;">
+      <button class="modal-close-btn" onclick="closeCreateEventModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div style="padding: 2.25rem;">
+        <h3 style="font-size: 1.45rem; margin-bottom: 0.35rem;">Publish a New Event</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Fill out the details to list your event instantly on EventPulse.</p>
+
+        <form onsubmit="handleCreateEventSubmit(event)" class="booking-form-grid">
+          <div class="form-full-width">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Event Title *</label>
+            <input type="text" id="newEventTitle" class="form-input" placeholder="e.g. Synthwave Cyberfest 2026" required>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Category *</label>
+            <select id="newEventCategory" class="form-input">
+              <option value="music">Concerts & Music</option>
+              <option value="tech">Tech & AI</option>
+              <option value="food">Food & Wine</option>
+              <option value="arts">Arts & Theatre</option>
+              <option value="sports">Sports & Gaming</option>
+              <option value="business">Business & Networking</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Event Date *</label>
+            <input type="date" id="newEventDate" class="form-input" required value="2026-12-30">
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Time Range</label>
+            <input type="text" id="newEventTime" class="form-input" placeholder="18:00 - 23:00" value="18:00 - 23:00">
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Venue Name *</label>
+            <input type="text" id="newEventVenue" class="form-input" placeholder="Grand Pavilion" required>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">City & State</label>
+            <input type="text" id="newEventCity" class="form-input" placeholder="San Francisco, CA" value="San Francisco, CA">
+          </div>
+
+          <div>
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Base Ticket Price ($ or ₹)</label>
+            <input type="number" id="newEventPrice" class="form-input" placeholder="45" value="45" min="0">
+          </div>
+
+          <div class="form-full-width">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Total Capacity (Tickets)</label>
+            <input type="number" id="newEventCapacity" class="form-input" placeholder="1000" value="1000" min="10">
+          </div>
+
+          <div class="form-full-width">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Cover Image URL</label>
+            <input type="url" id="newEventImage" class="form-input" placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80">
+          </div>
+
+          <div class="form-full-width">
+            <label style="display:block; font-size:0.78rem; font-weight:600; text-transform:uppercase; margin-bottom:0.35rem; color:var(--text-muted);">Event Description *</label>
+            <textarea id="newEventDesc" class="form-input" rows="3" placeholder="Describe the program, vibe, guest artists, and highlights..." required>Join us for an unforgettable gathering with live performances and networking under the night sky.</textarea>
+          </div>
+
+          <div class="form-full-width" style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1rem;">
+            <button type="button" class="btn btn-secondary" onclick="closeCreateEventModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Publish Live Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JAVASCRIPT APPLICATION MODULES -->
+  <script src="js/events-data.js"></script>
+  <script src="js/booking.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

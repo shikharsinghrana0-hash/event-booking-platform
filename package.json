@@ -1,0 +1,21 @@
+{
+  "name": "eventpulse-booking-platform",
+  "version": "1.0.0",
+  "description": "Modern & Responsive Event Booking Platform with Dual-Currency Support and Executive Organizer Admin Studio",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "dev": "python3 -m http.server 3000"
+  },
+  "keywords": [
+    "event-booking",
+    "ticketing-system",
+    "glassmorphism",
+    "admin-dashboard",
+    "qr-code",
+    "bento-grid",
+    "multi-currency"
+  ],
+  "author": "Shikhar Singh Rana",
+  "license": "MIT"
+}
