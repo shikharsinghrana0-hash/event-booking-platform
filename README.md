@@ -4,24 +4,24 @@
 > **Live Demo:** [https://shikharsinghrana0-hash.github.io/event-booking-platform/](https://shikharsinghrana0-hash.github.io/event-booking-platform/)  
 > **GitHub Repository:** [https://github.com/shikharsinghrana0-hash/event-booking-platform](https://github.com/shikharsinghrana0-hash/event-booking-platform)
 
-![EventPulse Platform Preview](screenshot.png)
+![EventPulse Platform Preview](screenshots/01-homepage-hero.png)
 
 A modern, responsive, and trending event discovery & ticket booking platform built with vanilla HTML5, CSS3, and modern ES6 JavaScript. Designed with a luxury dark/light glassmorphic aesthetic inspired by Pinterest and Dribbble, featuring instant multi-currency switching (**₹ INR** & **$ USD**), a 4-step ticket booking wizard with 3D virtual card preview, boarding-pass ticket generation with live canvas QR code, and a full-featured **Executive Admin & Organizer Studio**.
 
 ---
 
-## 📸 Complete Screenshots Gallery (Main Folder)
+## 📸 Complete Screenshots Gallery (`screenshots/` Folder)
 
-| # | Screen | Description | Direct File Link |
+| # | Screen | Description | File Link |
 |---|---|---|---|
-| 1 | **Homepage & Bento Hero** | Atmospheric hero countdown, dynamic categories & instant search | [01-homepage-hero.png](01-homepage-hero.png) |
-| 2 | **Ticket Tier Selection (Step 1)** | Multi-tier passes with live stepper controls & subtotal calculation | [02-booking-step1-tiers.png](02-booking-step1-tiers.png) |
-| 3 | **3D Virtual Card Checkout (Step 3)** | Interactive 3D credit card tilt & CVV flip with promo engine | [03-checkout-3d-card.png](03-checkout-3d-card.png) |
-| 4 | **Digital Boarding Pass (Step 4)** | Perforated pass with scannable Canvas QR code & barcode | [04-booking-confirmation-qr-pass.png](04-booking-confirmation-qr-pass.png) |
-| 5 | **Admin Overview & Analytics** | Real-time KPI cards & 7-day SVG revenue velocity spline chart | [05-admin-panel-overview.png](05-admin-panel-overview.png) |
-| 6 | **Attendees & Gate Check-In** | Live attendee roster table with one-click gate validation | [06-admin-attendees-checkin.png](06-admin-attendees-checkin.png) |
-| 7 | **Event Details Modal** | Full agenda schedule timeline, venue map & ticket purchase | [07-event-details-modal.png](07-event-details-modal.png) |
-| 8 | **Full Homepage Preview** | Complete page layout from hero to bento grid and footer | [homepage-full-preview.png](homepage-full-preview.png) |
+| 1 | **Homepage & Bento Hero** | Atmospheric hero countdown, dynamic categories & instant search | [screenshots/01-homepage-hero.png](screenshots/01-homepage-hero.png) |
+| 2 | **Ticket Tier Selection (Step 1)** | Multi-tier passes with live stepper controls & subtotal calculation | [screenshots/02-booking-step1-tiers.png](screenshots/02-booking-step1-tiers.png) |
+| 3 | **3D Virtual Card Checkout (Step 3)** | Interactive 3D credit card tilt & CVV flip with promo engine | [screenshots/03-checkout-3d-card.png](screenshots/03-checkout-3d-card.png) |
+| 4 | **Digital Boarding Pass (Step 4)** | Perforated pass with scannable Canvas QR code & barcode | [screenshots/04-booking-confirmation-qr-pass.png](screenshots/04-booking-confirmation-qr-pass.png) |
+| 5 | **Admin Overview & Analytics** | Real-time KPI cards & 7-day SVG revenue velocity spline chart | [screenshots/05-admin-panel-overview.png](screenshots/05-admin-panel-overview.png) |
+| 6 | **Attendees & Gate Check-In** | Live attendee roster table with one-click gate validation | [screenshots/06-admin-attendees-checkin.png](screenshots/06-admin-attendees-checkin.png) |
+| 7 | **Event Details Modal** | Full agenda schedule timeline, venue map & ticket purchase | [screenshots/07-event-details-modal.png](screenshots/07-event-details-modal.png) |
+| 8 | **Full Homepage Preview** | Complete page layout from hero to bento grid and footer | [screenshots/homepage-full-preview.png](screenshots/homepage-full-preview.png) |
 
 ---
 
@@ -104,6 +104,16 @@ Then visit **`http://localhost:3000`** in your browser.
 ## 📁 Project Structure
 
 ```
+├── screenshots/            # All platform preview screenshots in a single folder
+│   ├── 01-homepage-hero.png
+│   ├── 02-booking-step1-tiers.png
+│   ├── 03-checkout-3d-card.png
+│   ├── 04-booking-confirmation-qr-pass.png
+│   ├── 05-admin-panel-overview.png
+│   ├── 06-admin-attendees-checkin.png
+│   ├── 07-event-details-modal.png
+│   ├── homepage-full-preview.png
+│   └── screenshot.png
 ├── index.html              # Main single-page application & modals
 ├── css/
 │   └── style.css           # Glassmorphic UI styling, themes, animations & print styles
@@ -114,6 +124,7 @@ Then visit **`http://localhost:3000`** in your browser.
 │   └── app.js              # State manager, search/filters, theme & currency controllers
 ├── package.json            # Project metadata & convenience scripts
 ├── .gitignore              # Ignored files
+├── LICENSE                 # MIT License
 └── README.md               # Documentation
 ```
 
