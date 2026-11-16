@@ -1,5 +1,9 @@
 # 🎟️ EventPulse — NextGen Event Booking & Organizer Platform
 
+> **Lead Architect & Developer:** **SHIKHAR SINGH RANA**  
+> **Live Demo:** [https://shikharsinghrana0-hash.github.io/event-booking-platform/](https://shikharsinghrana0-hash.github.io/event-booking-platform/)  
+> **GitHub Repository:** [https://github.com/shikharsinghrana0-hash/event-booking-platform](https://github.com/shikharsinghrana0-hash/event-booking-platform)
+
 A modern, responsive, and trending event discovery & ticket booking platform built with vanilla HTML5, CSS3, and modern ES6 JavaScript. Designed with a luxury dark/light glassmorphic aesthetic inspired by Pinterest and Dribbble, featuring instant multi-currency switching (**₹ INR** & **$ USD**), a 4-step ticket booking wizard with 3D virtual card preview, boarding-pass ticket generation with live canvas QR code, and a full-featured **Executive Admin & Organizer Studio**.
 
 ---
@@ -102,6 +106,15 @@ Then visit **`http://localhost:3000`** in your browser.
 
 - **`EARLY20`**: Unlocks 20% discount on all ticket tiers.
 - **`STUDENT50`**: Unlocks 50% discount for student passes.
+
+---
+
+## 👨‍💻 Developer & Author
+
+**SHIKHAR SINGH RANA**
+- **GitHub:** [@shikharsinghrana0-hash](https://github.com/shikharsinghrana0-hash)
+- **Repository:** [event-booking-platform](https://github.com/shikharsinghrana0-hash/event-booking-platform)
+- **Role:** Full-Stack Architecture, UI/UX Design, and Engineering
 
 ---
 
