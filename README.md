@@ -4,6 +4,8 @@
 > **Live Demo:** [https://shikharsinghrana0-hash.github.io/event-booking-platform/](https://shikharsinghrana0-hash.github.io/event-booking-platform/)  
 > **GitHub Repository:** [https://github.com/shikharsinghrana0-hash/event-booking-platform](https://github.com/shikharsinghrana0-hash/event-booking-platform)
 
+![EventPulse Platform Preview](screenshot.png)
+
 A modern, responsive, and trending event discovery & ticket booking platform built with vanilla HTML5, CSS3, and modern ES6 JavaScript. Designed with a luxury dark/light glassmorphic aesthetic inspired by Pinterest and Dribbble, featuring instant multi-currency switching (**₹ INR** & **$ USD**), a 4-step ticket booking wizard with 3D virtual card preview, boarding-pass ticket generation with live canvas QR code, and a full-featured **Executive Admin & Organizer Studio**.
 
 ---
